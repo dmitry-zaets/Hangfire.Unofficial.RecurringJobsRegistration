@@ -34,11 +34,6 @@ namespace App.Web
           // When all parts are configured - it's time to register jobs.
           RecurringJobsRegistration.Register<IHourlyRecurringJob>(Cron.Hourly());
         }
-
-        private void RegisterDependencies(ContainerBuilder builder)
-        {
-            builder.RegisterModule(new Jobs.JobsModule());
-        }
     }
 }
 ```
