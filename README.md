@@ -8,7 +8,7 @@ It's easy!
 
 ###Usage:
 
-Create a job which will recurr hourly by implementing interface ```IHourlyRecurringJob```:
+####Create a job which will recurr hourly by implementing interface ```IHourlyRecurringJob```:
 ```
 namespace App.Web
 {
@@ -20,7 +20,40 @@ namespace App.Web
     }
 }
 ```
-Register all jobs by registering interface at start of your application, for example in Owin Startup class:
+####Create a new recurring job type by creating new interface derived from ```IRecurringJob```:
+```
+namespace App.Web
+{
+    public interface IMidnightRecurringJob : IRecurringJob { }
+}
+```
+####Create jobs by implementing interface ```IMidnightRecurringJob```: 
+```
+namespace App.Web
+{
+    public class MyMidnightJob1: IMidnightRecurringJob
+    {
+      public void Run() {
+        //Do the job.
+      }
+    }
+    
+    public class MyMidnightJob2: IMidnightRecurringJob
+    {
+      public void Run() {
+        //Do the job.
+      }
+    }
+    
+    public class MyMidnightJob3: IMidnightRecurringJob
+    {
+      public void Run() {
+        //Do the job.
+      }
+    }
+}
+```
+####Add all jobs by registering interfaces at start of your application, for example in Owin Startup class:
 ```
 [assembly: OwinStartup(typeof(App.Web.Startup))]
 namespace App.Web
@@ -33,6 +66,8 @@ namespace App.Web
           
           // When all parts are configured - it's time to register jobs.
           RecurringJobsRegistration.Register<IHourlyRecurringJob>(Cron.Hourly());
+          RecurringJobsRegistration.Register<IMidnightRecurringJob>("0 0 * * *");
+          
         }
     }
 }
