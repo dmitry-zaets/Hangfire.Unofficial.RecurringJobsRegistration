@@ -1,4 +1,4 @@
-# Hangfire.Unofficial.RecurringJobsRegistration
+# Hangfire Unofficial Recurring Jobs Registration
 **Unofficial** extension for dynamic registration of recurring jobs.
 
 Have a lot of recurring jobs which are running in same perios of time?
